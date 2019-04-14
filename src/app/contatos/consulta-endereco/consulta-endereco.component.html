@@ -1,0 +1,65 @@
+<div class="container jumbotron border border-dark">
+  <h1 class="text-center">Adicionar Contato</h1>
+  <form name="incluir_contato_form" #f="ngForm" (ngSubmit)="onSubmit()">
+      <div class="form-group">
+          <label for="nomecontato">Nome Completo:</label> 
+          <input class="form-control" id="nomecontato" name="nomecontato" [(ngModel)]="contato.nomeCompleto" #nomeCompleto="ngModel" type="text" required>
+          <div [hidden]="nomeCompleto.valid || nomeCompleto.pristine" class="alert alert-danger">Nome é obrigatório</div>
+      </div>
+      <div class="alert alert-dark">
+          <h5 class="text-center">Dados de Contato</h5>
+      </div>
+      <div class="input-group mb-3">
+          <label class="input-group-text col-lg-2" for="email1">Email Primario:</label>
+          <input class="form-control col-lg-4" id="email1" name="email1" [(ngModel)]="contato.email[0]" #email1="ngModel" type="email" placeholder="seu_email@exemplo.com" required>
+          <label class="input-group-text col-lg-2" for="email2">Email Secundario:</label> 
+          <input class="form-control col-lg-4" id="email2" name="email2" [(ngModel)]="contato.email[1]" #email2="ngModel" type="email" placeholder="seu_email@exemplo.com">
+      </div>
+      <div class="input-group mb-3">
+          <label class="input-group-text col-lg-2" for="telefones1">Telefone Contato 1:</label> 
+          <input class="form-control col-lg-4" id="telefones1" name="telefones1" [(ngModel)]="contato.telefones[0]" #telefones1="ngModel" type="number" required>
+          <label class="input-group-text col-lg-2" for="telefones2">Telefone Contato 2:</label> 
+          <input class="form-control col-lg-4" id="telefones2" name="telefones2" [(ngModel)]="contato.telefones[1]" #telefones2="ngModel" type="number">
+      </div>
+      <div class="alert alert-dark">
+          <h5 class="text-center">Endereço</h5>
+      </div>
+      <div class="form-group">
+        <label class="pr-2" for="cep">Cep:</label>
+          <input class="col-lg-2" [class.is-invalid]="!cep.valid && cep.touched"
+            id="cep" name="cep" [(ngModel)]="contato.endereco.cep" #cep="ngModel" type="number" required>
+        <span class="px-2"><button class="btn btn-success" type="button" [disabled]="!cep.valid" (click)="getEndereco()">Consulta Cep</button></span>
+      </div>
+      <div class="form-group">
+        <label for="logradouro">Logradouro:</label> 
+        <input class="form-control" id="logradouro" name="logradouro" [(ngModel)]="contato.endereco.logradouro" #logradouro="ngModel" type="text"  disabled>
+        <label  for="numlogradouro">Numero:
+          <input  class="form-control" id="numlogradouro" name="numlogradouro"  [(ngModel)]="contato.numlogradouro" #numlogradouro="ngModel" type="number" >   
+        </label>
+        <label class="px-3" for="complementologradouro">Complemento:
+          <input class="form-control" id="complementologradouro" name="complementologradouro" [(ngModel)]="contato.complementologradouro" #complementologradouro="ngModel" type="text" >   
+        </label> 
+      </div>
+      <div class="form-group">
+        <label for="bairro">Bairro:</label> 
+        <input class="form-control" id="bairro" name="bairro" [(ngModel)]="contato.endereco.bairro" #bairro="ngModel" type="text"  disabled required>
+      </div>
+      <div class="form-group">
+        <label for="cidade">Cidade:</label> 
+        <input class="form-control" id="cidade" name="cidade" [(ngModel)]="contato.endereco.cidade" #cidade="ngModel" type="text"  disabled required>
+      </div>
+      <div class="form-group">
+        <label for="estado">Estado:</label> 
+        <input class="form-control" id="estado" name="estado" [(ngModel)]="contato.endereco.estado" #estado="ngModel" type="text"  disabled required>
+      </div>
+      <div class="alert alert-dark">
+          <h5 class="text-center">Observação</h5>
+      </div>
+      <div class="form-group">
+          <label for="observacao">Observação do Contato:</label>
+          <textarea class="form-control" rows="3" id="observacao" name="observacao" #observacao="ngModel" [(ngModel)]="contato.observacao"></textarea>
+      </div>
+      <app-error-msg></app-error-msg>
+      <button class="btn btn-primary" type="submit" [disabled]="!f.valid">Adicionar Contato</button>
+  </form>
+</div>
